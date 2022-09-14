@@ -8,43 +8,40 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Commands
 {
-    public class UpdateRoomCommand : IRequest<int>
+    public class UpdateHotelRatingCommand : IRequest<int>
     {
         public int Id { get; set; }
         public int HotelId { get; set; }
-        public string Name { get; set; }
-        public int Number { get; set; }
-        public int Type { get; set; }
-        public int Price { get; set; }
-        public string Description { get; set; }
+        public double Rating { get; set; }
+        public string Guest { get; set; }
+        public string Review { get; set; }
 
-        public class UpdateRoomCommandHandler : IRequestHandler<UpdateRoomCommand, int>
+
+        public class UpdateHotelRatingCommandHandler : IRequestHandler<UpdateHotelRatingCommand, int>
         {
 
 
             private readonly IApplicationContext _context;
-            public UpdateRoomCommandHandler(IApplicationContext context)
+            public UpdateHotelRatingCommandHandler(IApplicationContext context)
             {
                 _context = context;
             }
-            public async Task<int> Handle(UpdateRoomCommand command, CancellationToken cancellationToken)
+            public async Task<int> Handle(UpdateHotelRatingCommand command, CancellationToken cancellationToken)
             {
-                var room = _context.Rooms.Where(a => a.Id == command.Id).FirstOrDefault();
-                if (room == null)
+                var hotelRating = _context.HotelRatings.Where(a => a.Id == command.Id).FirstOrDefault();
+                if (hotelRating == null)
                 {
                     return default;
                 }
                 else
                 {
-                    room.Name = command.Name;
-                    room.HotelId = command.HotelId;
-                    room.Name = command.Name;
-                    room.Number = command.Number;
-                    room.Type = command.Type;
-                    room.Price = command.Price;
-                    room.Description = command.Description;
+                    hotelRating.HotelId = command.HotelId;
+                    hotelRating.Rating = command.Rating;
+                    hotelRating.Guest = command.Guest;
+                    hotelRating.Review = command.Review;
+
                     await _context.SaveChangesAsync();
-                    return room.Id;
+                    return hotelRating.Id;
                 }
             }
         }

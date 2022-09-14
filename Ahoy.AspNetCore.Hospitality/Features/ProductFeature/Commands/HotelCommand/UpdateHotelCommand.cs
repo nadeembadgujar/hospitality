@@ -21,8 +21,6 @@ namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Commands
 
         public class UpdateHotelCommandHandler : IRequestHandler<UpdateHotelCommand, int>
         {
-
-
             private readonly IApplicationContext _context;
             public UpdateHotelCommandHandler(IApplicationContext context)
             {
@@ -38,8 +36,12 @@ namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Commands
                 else
                 {
                     hotel.Name = command.Name;
-                    hotel.Name = command.Name;
-                    hotel.Name = command.Name;
+                    hotel.Address = command.Address;
+                    hotel.Latitude = command.Latitude;
+                    hotel.Longitude = command.Longitude;
+                    hotel.Description = command.Description;
+                    hotel.Country = command.Country;
+                    hotel.City = command.City;
 
                     await _context.SaveChangesAsync();
                     return hotel.Id;

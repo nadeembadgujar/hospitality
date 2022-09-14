@@ -8,21 +8,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Commands
 {
-    public class DeleteRoomByIdCommand : IRequest<int>
+    public class DeleteHotelRatingByIdCommand : IRequest<int>
     {
         public int Id { get; set; }
-        public class DeleteRoomByIdCommandHandler : IRequestHandler<DeleteRoomByIdCommand, int>
+        public class DeleteHotelRatingByIdCommandHandler : IRequestHandler<DeleteHotelRatingByIdCommand, int>
         {
             private readonly IApplicationContext _context;
-            public DeleteRoomByIdCommandHandler(IApplicationContext context)
+            public DeleteHotelRatingByIdCommandHandler(IApplicationContext context)
             {
                 _context = context;
             }
-            public async Task<int> Handle(DeleteRoomByIdCommand command, CancellationToken cancellationToken)
+            public async Task<int> Handle(DeleteHotelRatingByIdCommand command, CancellationToken cancellationToken)
             {
-                var task = await _context.Rooms.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
+                var task = await _context.HotelRatings.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
                 if (task == null) return default;
-                _context.Rooms.Remove(task);
+                _context.HotelRatings.Remove(task);
                 await _context.SaveChangesAsync();
                 return task.Id;
             }

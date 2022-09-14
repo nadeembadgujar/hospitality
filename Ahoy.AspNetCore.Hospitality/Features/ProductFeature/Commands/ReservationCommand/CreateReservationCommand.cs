@@ -6,40 +6,40 @@ using MediatR;
 
 namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Commands
 {
-    public class CreateRoomCommand : IRequest<int>
+    public class CreateReservationCommand : IRequest<int>
     {
 
         public int Id { get; set; }
         public int HotelId { get; set; }
-        public string Name { get; set; }
-        public int Number { get; set; }
-        public int Type { get; set; }
-        public int Price { get; set; }
-        public string Description { get; set; }
+        public int RoomId { get; set; }
+        public string MadeBy { get; set; }
+        public DateTime DateIn { get; set; }
+        public DateTime DateOut { get; set; }
+        public string Guest { get; set; }
 
-        public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, int>
+        public class CreateReservationCommandHandler : IRequestHandler<CreateReservationCommand, int>
         {
             private readonly IApplicationContext _context;
-            public CreateRoomCommandHandler(IApplicationContext context)
+            public CreateReservationCommandHandler(IApplicationContext context)
             {
                 _context = context;
             }
 
-            public async Task<int> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
             {
-                var room = new Models.Room
+                var Reservation = new Models.Reservation
                 {
                     Id = request.Id,
                     HotelId = request.HotelId,
-                    Name = request.Name,
-                    Number =request.Number,
-                    Type = request.Type,
-                    Price = request.Price,
-                    Description = request.Description
+                    RoomId = request.RoomId,
+                    MadeBy =request.MadeBy,
+                    DateIn = request.DateIn,
+                    DateOut = request.DateOut,
+                    Guest = request.Guest
                 };
-                _context.Rooms.Add(room);
+                _context.Reservations.Add(Reservation);
                 await _context.SaveChangesAsync();
-                return room.Id;
+                return Reservation.Id;
             }
         }
     }

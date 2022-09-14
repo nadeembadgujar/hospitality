@@ -11,14 +11,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Ahoy.AspNetCore.Hospitality.Filter;
 using Ahoy.AspNetCore.Hospitality.Wrappers;
 using Ahoy.AspNetCore.Hospitality.Models;
+using Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Queries.FacilityQuery;
 
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Ahoy.AspNetCore.Hospitality.Controllers
 {
-    [Route("api/[controller]")]
-    public class HotelsController : ControllerBase
+    public class RoomsController : ControllerBase
     {
         private IMediator _mediator;
 
@@ -34,8 +33,8 @@ namespace Ahoy.AspNetCore.Hospitality.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery]PaginationFilter filter)
         {
-            var response = await Mediator.Send(new GetAllHotels(filter)) ;
-            return Ok(new Response<IEnumerable<Hotel>>(response));
+            var response = await Mediator.Send(new GetAllRoomsQuery(filter));
+            return Ok(new Response<IEnumerable<Room>>(response));
         }
 
 

@@ -6,40 +6,32 @@ using MediatR;
 
 namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Commands
 {
-    public class CreateHotelCommand : IRequest<int>
+    public class CreateFacilityCommand : IRequest<int>
     {
         public int Id { get; set; }
+        public int HotelId { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public string Description { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
+        public string Image { get; set; }
 
-        public class CreateHotelCommandHandler : IRequestHandler<CreateHotelCommand, int>
+        public class CreateFacilityCommandHandler : IRequestHandler<CreateFacilityCommand, int>
         {
             private readonly IApplicationContext _context;
-            public CreateHotelCommandHandler(IApplicationContext context)
+            public CreateFacilityCommandHandler(IApplicationContext context)
             {
                 _context = context;
             }
 
-            public async Task<int> Handle(CreateHotelCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(CreateFacilityCommand request, CancellationToken cancellationToken)
             {
-                var task = new Models.Hotel
+                var task = new Models.Facility
                 {
                     Id = request.Id,
                     Name = request.Name,
-                    Address = request.Address,
-                    Latitude = request.Latitude,
-                    Longitude = request.Longitude,
-                    City = request.City,
-                    Country = request.Country,
-                    Description = request.Description
+                    HotelId=request.HotelId,
+                    Image=request.Image
 
                 };
-                _context.Hotels.Add(task);
+                _context.Facilities.Add(task);
                 await _context.SaveChangesAsync();
                 return task.Id;
             }

@@ -6,40 +6,37 @@ using MediatR;
 
 namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Commands
 {
-    public class CreateRoomCommand : IRequest<int>
+    public class CreateHotelRatingCommand : IRequest<int>
     {
+
 
         public int Id { get; set; }
         public int HotelId { get; set; }
-        public string Name { get; set; }
-        public int Number { get; set; }
-        public int Type { get; set; }
-        public int Price { get; set; }
-        public string Description { get; set; }
+        public double Rating { get; set; }
+        public string Guest { get; set; }
+        public string Review { get; set; }
 
-        public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, int>
+        public class CreateHotelRatingCommandHandler : IRequestHandler<CreateHotelRatingCommand, int>
         {
             private readonly IApplicationContext _context;
-            public CreateRoomCommandHandler(IApplicationContext context)
+            public CreateHotelRatingCommandHandler(IApplicationContext context)
             {
                 _context = context;
             }
 
-            public async Task<int> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(CreateHotelRatingCommand request, CancellationToken cancellationToken)
             {
-                var room = new Models.Room
+                var HotelRating = new Models.HotelRating
                 {
                     Id = request.Id,
                     HotelId = request.HotelId,
-                    Name = request.Name,
-                    Number =request.Number,
-                    Type = request.Type,
-                    Price = request.Price,
-                    Description = request.Description
+                    Rating = request.Rating,
+                    Guest = request.Guest,
+                    Review= request.Review
                 };
-                _context.Rooms.Add(room);
+                _context.HotelRatings.Add(HotelRating);
                 await _context.SaveChangesAsync();
-                return room.Id;
+                return HotelRating.Id;
             }
         }
     }

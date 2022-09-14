@@ -11,21 +11,21 @@ using Microsoft.Extensions.DependencyInjection;
 using Ahoy.AspNetCore.Hospitality.Filter;
 using Ahoy.AspNetCore.Hospitality.Wrappers;
 using Ahoy.AspNetCore.Hospitality.Models;
-
+using Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Queries.ReservationQuery;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Ahoy.AspNetCore.Hospitality.Controllers
 {
     [Route("api/[controller]")]
-    public class HotelsController : ControllerBase
+    public class ReservationsController : Controller
     {
         private IMediator _mediator;
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateHotelCommand command)
+        public async Task<IActionResult> Create(CreateReservationCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
@@ -34,7 +34,7 @@ namespace Ahoy.AspNetCore.Hospitality.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery]PaginationFilter filter)
         {
-            var response = await Mediator.Send(new GetAllHotels(filter)) ;
+            var response = await Mediator.Send(new GetAllReservationsQuery(filter));
             return Ok(new Response<IEnumerable<Hotel>>(response));
         }
 

@@ -8,24 +8,24 @@ using Ahoy.AspNetCore.Hospitality.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Queries.HotelRatingRatingQuery
+namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Queries.ReservationQuery
 {
-    public class GetHotelRatingByIdQuery : IRequest<HotelRating>
+    public class GetReservationByIdQuery : IRequest<Reservation>
     {
         public int Id { get; set; }
-        public class GetHotelRatingByIdQueryHandler : IRequestHandler<GetHotelRatingByIdQuery, HotelRating>
+        public class GetReservationByIdQueryHandler : IRequestHandler<GetReservationByIdQuery, Reservation>
         {
             private readonly IApplicationContext _context;
-            public GetHotelRatingByIdQueryHandler(IApplicationContext context)
+            public GetReservationByIdQueryHandler(IApplicationContext context)
             {
                 _context = context;
             }
 
-            public async Task<HotelRating> Handle(GetHotelRatingByIdQuery query, CancellationToken cancellationToken)
+            public async Task<Reservation> Handle(GetReservationByIdQuery query, CancellationToken cancellationToken)
             {
-                var HotelRating = await _context.HotelRatings.Where(a => a.Id == query.Id).FirstOrDefaultAsync();
-                if (HotelRating == null) return null;
-                return HotelRating;
+                var Reservation = await _context.Reservations.Where(a => a.Id == query.Id).FirstOrDefaultAsync();
+                if (Reservation == null) return null;
+                return Reservation;
             }
 
         }

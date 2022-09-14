@@ -6,42 +6,40 @@ using MediatR;
 
 namespace Ahoy.AspNetCore.Hospitality.Features.ProductFeature.Commands
 {
-    public class CreateHotelCommand : IRequest<int>
+    public class CreateRoomCommand : IRequest<int>
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public string Description { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
 
-        public class CreateHotelCommandHandler : IRequestHandler<CreateHotelCommand, int>
+        public int Id { get; set; }
+        public int HotelId { get; set; }
+        public string Name { get; set; }
+        public int Number { get; set; }
+        public int Type { get; set; }
+        public int Price { get; set; }
+        public string Description { get; set; }
+
+        public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, int>
         {
             private readonly IApplicationContext _context;
-            public CreateHotelCommandHandler(IApplicationContext context)
+            public CreateRoomCommandHandler(IApplicationContext context)
             {
                 _context = context;
             }
 
-            public async Task<int> Handle(CreateHotelCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
             {
-                var task = new Models.Hotel
+                var room = new Models.Room
                 {
                     Id = request.Id,
+                    HotelId = request.HotelId,
                     Name = request.Name,
-                    Address = request.Address,
-                    Latitude = request.Latitude,
-                    Longitude = request.Longitude,
-                    City = request.City,
-                    Country = request.Country,
+                    Number =request.Number,
+                    Type = request.Type,
+                    Price = request.Price,
                     Description = request.Description
-
                 };
-                _context.Hotels.Add(task);
+                _context.Rooms.Add(room);
                 await _context.SaveChangesAsync();
-                return task.Id;
+                return room.Id;
             }
         }
     }
