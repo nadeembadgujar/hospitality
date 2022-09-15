@@ -39,6 +39,8 @@
     <Folder Include="Features\ProductFeature\Queries\RoomQuery\" />
     <Folder Include="Filter\" />
     <Folder Include="Wrappers\" />
+    <Folder Include="Services\" />
+    <Folder Include="Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Features\ProductFeature\Commands\CreateHotel.cs" />

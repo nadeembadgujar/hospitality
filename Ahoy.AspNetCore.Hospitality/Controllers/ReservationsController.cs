@@ -35,7 +35,7 @@ namespace Ahoy.AspNetCore.Hospitality.Controllers
         public async Task<IActionResult> GetAll([FromQuery]PaginationFilter filter)
         {
             var response = await Mediator.Send(new GetAllReservationsQuery(filter));
-            return Ok(new Response<IEnumerable<Hotel>>(response));
+            return Ok(new Response<IEnumerable<Reservation>>(response));
         }
 
 

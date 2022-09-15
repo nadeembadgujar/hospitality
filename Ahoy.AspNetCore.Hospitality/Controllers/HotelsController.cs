@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Ahoy.AspNetCore.Hospitality.Filter;
 using Ahoy.AspNetCore.Hospitality.Wrappers;
 using Ahoy.AspNetCore.Hospitality.Models;
+using Ahoy.AspNetCore.Hospitality.Contracts;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,6 +24,13 @@ namespace Ahoy.AspNetCore.Hospitality.Controllers
         private IMediator _mediator;
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+
+        private readonly IHotelService _service;
+        public HotelsController(IHotelService service)
+        {
+            _service = service;
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateHotelCommand command)

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahoy.AspNetCore.Hospitality", "Ahoy.AspNetCore.Hospitality\Ahoy.AspNetCore.Hospitality.csproj", "{584E3BC3-C138-4054-AF52-60D9215D76A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahoy.AspNetCore.Hospitality.Test", "Ahoy.AspNetCore.Hospitality.Test\Ahoy.AspNetCore.Hospitality.Test.csproj", "{F080E831-98ED-455D-993A-53F5BDAB3263}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +13,5 @@ Global
 		{584E3BC3-C138-4054-AF52-60D9215D76A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{584E3BC3-C138-4054-AF52-60D9215D76A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{584E3BC3-C138-4054-AF52-60D9215D76A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F080E831-98ED-455D-993A-53F5BDAB3263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F080E831-98ED-455D-993A-53F5BDAB3263}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F080E831-98ED-455D-993A-53F5BDAB3263}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F080E831-98ED-455D-993A-53F5BDAB3263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
